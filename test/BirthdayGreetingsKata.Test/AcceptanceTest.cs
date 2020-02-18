@@ -46,8 +46,9 @@ namespace BirthdayGreetings.Tests
         void ExecuteBirthdayServiceFor(string employeeFileName, string date)
         {
             IMessageService messageService = new MessageService("localhost",NONSTANDARD_PORT);
-            var service = new BirthdayService(messageService);
-            service.SendGreetings(employeeFileName, new XDate(date));
+            IEmployeeRepository employeeRepository = new FileEmployeeRepository(employeeFileName);
+            var service = new BirthdayService(messageService, employeeRepository);
+            service.SendGreetings(new XDate(date));
             emailIterator = server.ReceivedEmail;
         }
     }
