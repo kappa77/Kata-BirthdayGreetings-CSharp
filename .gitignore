@@ -41,3 +41,5 @@ packages/
 .Trashes
 ehthumbs.db
 Thumbs.db
+/.vs/BirthdayGreetingsKata-CSharp/v16/Server/sqlite3
+/.vs/BirthdayGreetingsKata-CSharp/v16/TestStore/0
