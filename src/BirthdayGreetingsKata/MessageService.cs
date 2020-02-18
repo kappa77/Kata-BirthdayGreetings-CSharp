@@ -14,15 +14,15 @@ namespace BirthdayGreetings.Tests
             this.smtpHost = smtpHost;
         }
 
-        public void SendMessage(string senderHereCom, string subject, string body, string recipient)
+        public void SendMessage(string senderHereCom, BirthdayService.GreetingMessage greetingMessage)
         {
              var message = new MimeMessage();
                 message.From.Add(new MailboxAddress(senderHereCom));
-                message.To.Add(new MailboxAddress(recipient));
-                message.Subject = subject;
+                message.To.Add(new MailboxAddress(greetingMessage.Recipient));
+                message.Subject = greetingMessage.Subject;
                 message.Body = new TextPart("plain")
                 {
-                    Text = body
+                    Text = greetingMessage.Body
                 };
                 // Send the message
                 SendMessage(smtpHost, smtpPort, message);
