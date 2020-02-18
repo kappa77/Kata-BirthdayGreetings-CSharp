@@ -7,17 +7,19 @@ namespace BirthdayGreetings.Tests
     {
         private string smtpHost;
         private int smtpPort;
+        private readonly string _sender;
 
-        public MessageService(string smtpHost,int smtpPort)
+        public MessageService(string smtpHost,int smtpPort, string sender)
         {
             this.smtpPort = smtpPort;
+            _sender = sender;
             this.smtpHost = smtpHost;
         }
 
-        public void SendMessage(string senderHereCom, BirthdayService.GreetingMessage greetingMessage)
+        public void SendMessage( BirthdayService.GreetingMessage greetingMessage)
         {
              var message = new MimeMessage();
-                message.From.Add(new MailboxAddress(senderHereCom));
+                message.From.Add(new MailboxAddress(_sender));
                 message.To.Add(new MailboxAddress(greetingMessage.Recipient));
                 message.Subject = greetingMessage.Subject;
                 message.Body = new TextPart("plain")

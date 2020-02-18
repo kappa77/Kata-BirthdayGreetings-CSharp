@@ -25,7 +25,7 @@ namespace BirthdayGreetings
                 if (employee.IsBirthday(xDate))
                 {
                     var greetingMessage = new GreetingMessage(employee);
-                    _messageService.SendMessage("sender@here.com", greetingMessage );
+                    _messageService.SendMessage( greetingMessage );
                 }
             }
 

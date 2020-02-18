@@ -2,6 +2,6 @@
 {
     public interface IMessageService
     {
-        void SendMessage(string senderHereCom, BirthdayService.GreetingMessage greetingMessage);
+        void SendMessage(  BirthdayService.GreetingMessage greetingMessage);
     }
 }
