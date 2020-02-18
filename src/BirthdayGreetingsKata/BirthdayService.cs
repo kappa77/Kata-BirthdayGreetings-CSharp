@@ -17,9 +17,9 @@ namespace BirthdayGreetings
         }
         public void SendGreetings(string fileName, XDate xDate)
         {
+            List<Employee> employees = new List<Employee>();
             if (System.IO.File.Exists(fileName))
             {
-                List<Employee> employees = new List<Employee>();
                 var objStream = new FileStream(fileName, FileMode.Open);
                 var objReader = new StreamReader(objStream);
                 do
@@ -40,15 +40,15 @@ namespace BirthdayGreetings
                     }
                 } while (objReader.Peek() != -1);
 
-                foreach (var employee in employees)
+            }
+            foreach (var employee in employees)
+            {
+                if (employee.IsBirthday(xDate))
                 {
-                    if (employee.IsBirthday(xDate))
-                    {
-                        var recipient = employee.Email;
-                        var body = string.Format("Happy Birthday, dear {0}!", employee.FirstName);
-                        var subject = "Happy Birthday!";
-                        _messageService.SendMessage("sender@here.com", subject, body, recipient);
-                    }
+                    var recipient = employee.Email;
+                    var body = string.Format("Happy Birthday, dear {0}!", employee.FirstName);
+                    var subject = "Happy Birthday!";
+                    _messageService.SendMessage("sender@here.com", subject, body, recipient);
                 }
             }
 
