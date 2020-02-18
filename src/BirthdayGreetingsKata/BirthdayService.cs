@@ -8,12 +8,12 @@ namespace BirthdayGreetings
 {
     public class BirthdayService
     {
-        private readonly IMessageService _messageService;
+        private readonly IGreetingMessageService _greetingMessageService;
         private readonly IEmployeeRepository _employeeRepository;
 
-        public BirthdayService(IMessageService messageService,IEmployeeRepository  employeeRepository)
+        public BirthdayService(IGreetingMessageService greetingMessageService,IEmployeeRepository  employeeRepository)
         {
-            _messageService = messageService;
+            _greetingMessageService = greetingMessageService;
             _employeeRepository = employeeRepository;
         }
         public void SendGreetings(XDate xDate)
@@ -25,26 +25,11 @@ namespace BirthdayGreetings
                 if (employee.IsBirthday(xDate))
                 {
                     var greetingMessage = new GreetingMessage(employee);
-                    _messageService.SendMessage( greetingMessage );
+                    _greetingMessageService.SendMessage( greetingMessage );
                 }
             }
 
         }
 
-        public class GreetingMessage
-        {
-            public GreetingMessage(Employee employee)
-            {
-                Recipient = employee.Email;
-                Body = string.Format("Happy Birthday, dear {0}!", employee.FirstName);
-                Subject = "Happy Birthday!";
-            }
-
-            public string Subject { get; set; }
-
-            public string Body { get; set; }
-
-            public string Recipient { get; set; }
-        }
     }
 }

@@ -3,20 +3,20 @@ using MimeKit;
 
 namespace BirthdayGreetings.Tests
 {
-    public class MessageService : IMessageService
+    public class GreetingMessageService : IGreetingMessageService
     {
         private string smtpHost;
         private int smtpPort;
         private readonly string _sender;
 
-        public MessageService(string smtpHost,int smtpPort, string sender)
+        public GreetingMessageService(string smtpHost,int smtpPort, string sender)
         {
             this.smtpPort = smtpPort;
             _sender = sender;
             this.smtpHost = smtpHost;
         }
 
-        public void SendMessage( BirthdayService.GreetingMessage greetingMessage)
+        public void SendMessage(  GreetingMessage greetingMessage)
         {
              var message = new MimeMessage();
                 message.From.Add(new MailboxAddress(_sender));
